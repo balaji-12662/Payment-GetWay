@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Page</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <h2>Enter Payment Details</h2>
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <!-- Form to post the amount -->
+    <form method="POST" action="/payment/">
+        {% csrf_token %}
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" name="amount" required>
+        <br><br>
+        <button type="submit">Pay Now</button>
+    </form>
+
+    {% if order_id %}
+        <script>
+            var options = {
+                "key": "{{ razorpay_key }}",  // Razorpay API Key
+                "amount": "{{ amount }}00",   // Amount in paise (multiply by 100)
+                "currency": "{{ currency }}", // Currency
+                "name": "Your Company Name",  // You can customize this
+                "description": "Test Transaction",
+                "order_id": "{{ order_id }}", // Order ID from Razorpay
+                "handler": function (response) {
+                    alert("Payment successful! Payment ID: " + response.razorpay_payment_id);
+                    // You can make an AJAX request here to save the payment response in your backend
+                },
+                "prefill": {
+                    "name": "Your Customer's Name",
+                    "email": "customer@example.com",
+                    "contact": "9999999999"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+
+            // Automatically open Razorpay payment page when page is loaded
+            window.onload = function() {
+                rzp1.open();
+            }
+        </script>
+    {% endif %}
+</body>
+</html>
