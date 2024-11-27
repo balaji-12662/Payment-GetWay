@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-m5f%@l%!uu=3dh4b)@g+r27dvuj%sim5uxn2*m#npv_=8s^%73
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -129,5 +129,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 RAZORPAY_KEY_ID = 'rzp_test_xS92UPU6boYho3'
 RAZORPAY_KEY_SECRET = 'M7aRNAlfPLBLhne6b2P6h21e'
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-STATIC_ROOT = BASE_DIR / "staticfiles"
+
